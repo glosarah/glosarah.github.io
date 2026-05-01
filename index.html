@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gloria Sarah Saragih — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:   #0F2044;
+  --blue:   #1D4ED8;
+  --teal:   #0D9488;
+  --amber:  #D97706;
+  --cream:  #F8F5F0;
+  --warm:   #EDE9E1;
+  --text:   #1C1917;
+  --mid:    #6B7280;
+  --light:  #F3F4F6;
+  --white:  #FFFFFF;
+  --serif:  'DM Serif Display', Georgia, serif;
+  --sans:   'DM Sans', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE OVERLAY ─────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ── NAV ───────────────────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 3rem;
+  background: rgba(248,245,240,0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(15,32,68,0.08);
+}
+
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--mid);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--navy); }
+
+/* ── HERO ──────────────────────────────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6rem 3rem 6rem 5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.2s forwards;
+}
+
+.hero-tag::before {
+  content: '';
+  width: 24px;
+  height: 2px;
+  background: var(--teal);
+}
+
+.hero-name {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 5vw, 5.5rem);
+  line-height: 1.0;
+  color: var(--navy);
+  letter-spacing: -0.03em;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.35s forwards;
+}
+
+.hero-name em {
+  font-style: italic;
+  color: var(--teal);
+}
+
+.hero-role {
+  font-size: 1.05rem;
+  color: var(--mid);
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.5s forwards;
+}
+
+.hero-summary {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text);
+  max-width: 480px;
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.65s forwards;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.8s forwards;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  background: var(--navy);
+  color: var(--white);
+  border: none;
+  border-radius: 2px;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  letter-spacing: 0.02em;
+}
+
+.btn-primary:hover { background: var(--blue); transform: translateY(-1px); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  background: transparent;
+  color: var(--navy);
+  border: 1.5px solid var(--navy);
+  border-radius: 2px;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover { background: var(--navy); color: var(--white); }
+
+.hero-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--navy);
+  overflow: hidden;
+}
+
+/* Decorative geometric background */
+.hero-right::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hero-right::after {
+  content: '';
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hero-stats {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  width: 360px;
+  opacity: 0;
+  animation: fadeIn 1s ease 1s forwards;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.05);
+  padding: 2rem 1.5rem;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: background 0.3s;
+}
+
+.stat-card:hover { background: rgba(255,255,255,0.09); }
+
+.stat-card.accent { background: var(--teal); border-color: var(--teal); }
+.stat-card.accent2 { background: rgba(217,119,6,0.3); border-color: rgba(217,119,6,0.4); }
+
+.stat-num {
+  font-family: var(--serif);
+  font-size: 2.8rem;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.6);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+/* ── COMPETENCIES ──────────────────────────────────────────────────── */
+#competencies {
+  padding: 8rem 5rem;
+  background: var(--white);
+  position: relative;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 3vw, 3rem);
+  color: var(--navy);
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  line-height: 1.15;
+}
+
+.section-sub {
+  font-size: 1rem;
+  color: var(--mid);
+  max-width: 540px;
+  line-height: 1.7;
+  margin-bottom: 4rem;
+}
+
+.competency-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.comp-card {
+  background: var(--cream);
+  padding: 3rem 2.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.comp-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0;
+  height: 3px;
+  background: var(--teal);
+  transition: width 0.4s ease;
+}
+
+.comp-card:hover::before,
+.comp-card.active::before { width: 100%; }
+
+.comp-card:hover,
+.comp-card.active {
+  background: var(--white);
+  border-color: rgba(15,32,68,0.08);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(15,32,68,0.08);
+}
+
+.comp-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.comp-icon.leadership { background: rgba(15,32,68,0.08); }
+.comp-icon.analytical { background: rgba(13,148,136,0.1); }
+.comp-icon.adaptability { background: rgba(217,119,6,0.1); }
+
+.comp-title {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--navy);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.comp-desc {
+  font-size: 0.9rem;
+  color: var(--mid);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.comp-evidence {
+  display: none;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.comp-card.active .comp-evidence { display: flex; }
+
+.evidence-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.evidence-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.comp-cta {
+  margin-top: 1.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--teal);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+
+/* ── EXPERIENCE TIMELINE ───────────────────────────────────────────── */
+#experience {
+  padding: 8rem 5rem;
+  background: var(--cream);
+}
+
+.exp-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 4rem;
+  margin-top: 4rem;
+}
+
+.exp-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+}
+
+.filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.25rem;
+  background: transparent;
+  border: 1.5px solid rgba(15,32,68,0.12);
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--mid);
+  text-align: left;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover { border-color: var(--navy); color: var(--navy); }
+.filter-btn.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+.filter-btn .filter-count {
+  margin-left: auto;
+  font-size: 0.7rem;
+  opacity: 0.6;
+}
+
+.exp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.exp-item {
+  background: var(--white);
+  border: 1px solid rgba(15,32,68,0.06);
+  padding: 2rem 2.5rem;
+  transition: all 0.3s;
+  cursor: pointer;
+  position: relative;
+}
+
+.exp-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: background 0.3s;
+}
+
+.exp-item:hover::before { background: var(--teal); }
+.exp-item.open::before { background: var(--navy); }
+
+.exp-item:hover {
+  box-shadow: 0 8px 30px rgba(15,32,68,0.07);
+  transform: translateX(4px);
+}
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.exp-org {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--navy);
+  margin-bottom: 0.25rem;
+}
+
+.exp-role {
+  font-size: 0.875rem;
+  color: var(--teal);
+  font-weight: 500;
+}
+
+.exp-meta {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.exp-date {
+  font-size: 0.78rem;
+  color: var(--mid);
+  margin-bottom: 0.25rem;
+}
+
+.exp-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 1px;
+}
+
+.tag-research { background: rgba(13,148,136,0.1); color: var(--teal); }
+.tag-leadership { background: rgba(15,32,68,0.08); color: var(--navy); }
+.tag-media { background: rgba(217,119,6,0.1); color: var(--amber); }
+.tag-portfolio { background: rgba(29,78,216,0.1); color: var(--blue); }
+
+.exp-body {
+  display: none;
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+  border-top: 1px solid rgba(15,32,68,0.06);
+}
+
+.exp-item.open .exp-body { display: block; }
+
+.star-method {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.star-item {
+  padding: 1rem 1.25rem;
+  background: var(--cream);
+  border-radius: 1px;
+}
+
+.star-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 0.4rem;
+}
+
+.star-text {
+  font-size: 0.85rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.exp-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.highlight-chip {
+  font-size: 0.75rem;
+  padding: 0.3rem 0.75rem;
+  background: var(--light);
+  color: var(--text);
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+/* ── PORTFOLIO SECTION ─────────────────────────────────────────────── */
+#portfolio {
+  padding: 8rem 5rem;
+  background: var(--navy);
+  position: relative;
+  overflow: hidden;
+}
+
+#portfolio::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 50%;
+  top: -200px;
+  right: -100px;
+}
+
+#portfolio .section-label { color: var(--teal); }
+#portfolio .section-title { color: var(--white); }
+#portfolio .section-sub { color: rgba(255,255,255,0.5); }
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 4rem;
+}
+
+.portfolio-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 3rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--teal);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.portfolio-card:hover::after { transform: scaleX(1); }
+.portfolio-card:hover { background: rgba(255,255,255,0.07); }
+
+.portfolio-card.featured {
+  grid-column: 1 / -1;
+  background: rgba(13,148,136,0.15);
+  border-color: rgba(13,148,136,0.3);
+}
+
+.port-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1rem;
+}
+
+.port-title {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.port-desc {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.port-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.port-highlight {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.83rem;
+  color: rgba(255,255,255,0.7);
+}
+
+.port-highlight::before {
+  content: '→';
+  color: var(--teal);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.port-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tool-chip {
+  font-size: 0.7rem;
+  padding: 0.25rem 0.6rem;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.6);
+  border-radius: 1px;
+  font-weight: 500;
+}
+
+/* ── CONTACT ───────────────────────────────────────────────────────── */
+#contact {
+  padding: 8rem 5rem;
+  background: var(--cream);
+  text-align: center;
+}
+
+.contact-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-email {
+  font-family: var(--serif);
+  font-size: 2.5rem;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+  margin: 2rem 0;
+  display: block;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.contact-email:hover { color: var(--teal); }
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.social-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.social-link:hover { color: var(--navy); }
+
+/* ── FOOTER ────────────────────────────────────────────────────────── */
+footer {
+  padding: 2rem 5rem;
+  background: var(--navy);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer p {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ── ANIMATIONS ────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  #hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .hero-left { padding: 5rem 2rem; }
+  #competencies, #experience, #portfolio, #contact { padding: 5rem 2rem; }
+  .competency-grid { grid-template-columns: 1fr; }
+  .exp-grid { grid-template-columns: 1fr; }
+  .exp-filters { flex-direction: row; flex-wrap: wrap; position: static; }
+  .portfolio-grid { grid-template-columns: 1fr; }
+  .portfolio-card.featured { grid-column: 1; }
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { gap: 1rem; }
+  footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Gloria Sarah Saragih</div>
+  <ul class="nav-links">
+    <li><a href="#competencies">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-tag">SMDP 2026 Candidate · Samudera Indonesia</div>
+    <h1 class="hero-name">Gloria<br><em>Sarah</em><br>Saragih</h1>
+    <p class="hero-role">Researcher · Organizational Leader · Analyst</p>
+    <p class="hero-summary">
+      Fresh graduate from Universitas Indonesia with a track record of leading across diverse, high-stakes environments — from a remote field research post in West Papua to founding a 40-member student organization. Independently built two logistics analysis projects to deepen understanding of the industry I want to build a career in.
+    </p>
+    <div class="hero-cta">
+      <a href="#portfolio" class="btn-primary">View Portfolio ↓</a>
+      <a href="#competencies" class="btn-secondary">Core Competencies</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-stats">
+      <div class="stat-card accent">
+        <div class="stat-num">40+</div>
+        <div class="stat-label">Members led in student org founded from zero</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">20+</div>
+        <div class="stat-label">Gov. institutions engaged in Papua field research</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Partner orgs coordinated, Women's March Jakarta</div>
+      </div>
+      <div class="stat-card accent2">
+        <div class="stat-num">3.63</div>
+        <div class="stat-label">GPA · Universitas Indonesia · Philosophy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETENCIES -->
+<section id="competencies">
+  <div class="reveal">
+    <div class="section-label">Core Competencies</div>
+    <h2 class="section-title">Three reasons I'm<br>built for SMDP</h2>
+    <p class="section-sub">Click each card to see concrete evidence from my actual experience.</p>
+  </div>
+
+  <div class="competency-grid reveal">
+    <div class="comp-card" onclick="toggleComp(this)">
+      <div class="comp-icon leadership">🧭</div>
+      <h3 class="comp-title">Leadership</h3>
+      <p class="comp-desc">Building from zero, directing cross-functional teams, and driving execution across multiple programs simultaneously.</p>
+      <div class="comp-evidence">
+        <div class="evidence-item"><div class="evidence-dot"></div>Founded FIB UI Anti Kekerasan Seksual from scratch — recruited 40 members, structured 5 divisions, executed 5+ programs</div>
+        <div class="evidence-item"><div class="evidence-dot"></div>Achieved 600+ student endorsements in 2 weeks — demonstrating ability to mobilize stakeholders rapidly</div>
+        <div class="evidence-item"><div class="evidence-dot"></div>Served as Liaison Officer for Women's March Jakarta press conference, coordinating 10+ organizations with diverse mandates</div>
+        <div class="evidence-item"><div class="evidence-dot"></div>Mentored 30+ new students through FIB UI orientation, maintaining engagement across the full program</div>
+      </div>
+      <div class="comp-cta">Click to see evidence ↓</div>
+    </div>
+
+    <div class="comp-card" onclick="toggleComp(this)">
+      <div class="comp-icon analytical">📊</div>
+      <h3 class="comp-title">Analytical Thinking</h3>
+      <p class="comp-desc">Translating complex, multi-source data into structured findings and actionable recommendations — across research, operations, and business contexts.</p>
+      <div class="comp-evidence">
+        <div class="evidence-item"><div class="evidence-dot"></div>Processed 100+ pages of field transcripts in West Papua; produced policy briefs that shaped government follow-up actions</div>
+        <div class="evidence-item"><div class="evidence-dot"></div>Independently built a 60-shipment supply chain case study: identified 3 bottlenecks, modeled impact simulation projecting on-time delivery improvement from 25% → ~70%</div>
+        <div class="evidence-item"><div class="evidence-dot"></div>Applied SQL querying and data analysis across 5+ datasets (Binar Academy bootcamp)</div>
+        <div class="evidence-item"><div class="evidence-dot"></div>Developed OKRs, MVP planning, and Go-to-Market strategy in product management bootcamp (Rakamin x Traveloka)</div>
+      </div>
+      <div class="comp-cta">Click to see evidence ↓</div>
+    </div>
+
+    <div class="comp-card" onclick="toggleComp(this)">
+      <div class="comp-icon adaptability">🗺</div>
+      <h3 class="comp-title">Adaptability</h3>
+      <p class="comp-desc">Operating effectively across radically different environments — remote field posts, fast-paced newsrooms, policy institutions, and independent research.</p>
+      <div class="comp-evidence">
+        <div class="evidence-item"><div class="evidence-dot"></div>Deployed to Werianggi, West Papua (Aug–Dec 2025) — conducted research in a remote, infrastructure-limited environment with minimal prior sector knowledge</div>
+        <div class="evidence-item"><div class="evidence-dot"></div>Shifted from advocacy organization leadership → editorial journalism → field research → logistics analysis — each requiring rapid domain learning</div>
+        <div class="evidence-item"><div class="evidence-dot"></div>Self-initiated two logistics portfolio projects with zero formal background in logistics — demonstrating willingness to learn hard things independently</div>
+        <div class="evidence-item"><div class="evidence-dot"></div>Comfortable being placed anywhere — already proven in Papua. Ready for Samudera's multi-location deployment model.</div>
+      </div>
+      <div class="comp-cta">Click to see evidence ↓</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="reveal">
+    <div class="section-label">Experience</div>
+    <h2 class="section-title">Every role, reframed<br>for what it actually taught</h2>
+    <p class="section-sub">Click any role to see the STAR breakdown — what I did, why it mattered, and what it proves.</p>
+  </div>
+
+  <div class="exp-grid">
+    <div class="exp-filters reveal">
+      <p style="font-size:0.75rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--mid); margin-bottom:0.5rem;">Filter by</p>
+      <button class="filter-btn active" onclick="filterExp('all', this)">All Roles <span class="filter-count">6</span></button>
+      <button class="filter-btn" onclick="filterExp('research', this)">Research <span class="filter-count">2</span></button>
+      <button class="filter-btn" onclick="filterExp('leadership', this)">Leadership <span class="filter-count">3</span></button>
+      <button class="filter-btn" onclick="filterExp('media', this)">Media <span class="filter-count">2</span></button>
+      <button class="filter-btn" onclick="filterExp('portfolio', this)">Portfolio Projects <span class="filter-count">2</span></button>
+    </div>
+
+    <div class="exp-list reveal">
+
+      <!-- Ekspedisi Patriot -->
+      <div class="exp-item" data-tags="research" onclick="toggleExp(this)">
+        <div class="exp-header">
+          <div>
+            <div class="exp-org">Ekspedisi Patriot — Kementerian Transmigrasi RI</div>
+            <div class="exp-role">Field Researcher · Werianggi, West Papua</div>
+          </div>
+          <div class="exp-meta">
+            <div class="exp-date">Aug – Dec 2025</div>
+            <span class="exp-tag tag-research">Research</span>
+          </div>
+        </div>
+        <div class="exp-body">
+          <div class="star-method">
+            <div class="star-item">
+              <div class="star-label">Situation</div>
+              <div class="star-text">Government needed field evaluation of transmigration policy implementation in remote West Papua — 20+ institutions to engage, minimal infrastructure, complex stakeholder landscape.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-label">Task</div>
+              <div class="star-text">Lead structured FGDs with government offices and community stakeholders; process raw data into policy-grade deliverables within a fixed timeline.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-label">Action</div>
+              <div class="star-text">Designed and facilitated 20+ institutional FGDs; coded and processed 100+ pages of transcripts; contributed to 5+ structured reports and policy briefs with actionable government recommendations.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-label">Result</div>
+              <div class="star-text">Delivered all research outputs on schedule. Findings directly informed government evaluation and follow-up planning for the transmigration program.</div>
+            </div>
+          </div>
+          <div class="exp-highlights">
+            <span class="highlight-chip">Stakeholder Engagement</span>
+            <span class="highlight-chip">Qualitative Research</span>
+            <span class="highlight-chip">Policy Writing</span>
+            <span class="highlight-chip">Remote Operations</span>
+            <span class="highlight-chip">NVivo · Data Coding</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FIB UI AKS -->
+      <div class="exp-item" data-tags="leadership" onclick="toggleExp(this)">
+        <div class="exp-header">
+          <div>
+            <div class="exp-org">FIB UI Anti Kekerasan Seksual</div>
+            <div class="exp-role">Founder & Head · Depok, West Java</div>
+          </div>
+          <div class="exp-meta">
+            <div class="exp-date">Feb – Jul 2025</div>
+            <span class="exp-tag tag-leadership">Leadership</span>
+          </div>
+        </div>
+        <div class="exp-body">
+          <div class="star-method">
+            <div class="star-item">
+              <div class="star-label">Situation</div>
+              <div class="star-text">No formal student advocacy structure existed at FIB UI. Gap identified between student need and institutional support.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-label">Task</div>
+              <div class="star-text">Build an organization from zero: recruit team, design structure, set direction, execute programs — with no budget and no precedent.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-label">Action</div>
+              <div class="star-text">Built 5-division organizational structure; recruited 40+ members; coordinated 10+ internal and external stakeholders; executed 5+ programs including awareness campaigns and survivor support mechanisms.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-label">Result</div>
+              <div class="star-text">Achieved 600+ student endorsements within 2 weeks of launch. Organization became recognized formal initiative within FIB UI.</div>
+            </div>
+          </div>
+          <div class="exp-highlights">
+            <span class="highlight-chip">Org Building from Zero</span>
+            <span class="highlight-chip">Team Leadership</span>
+            <span class="highlight-chip">Stakeholder Management</span>
+            <span class="highlight-chip">Program Execution</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Women's March -->
+      <div class="exp-item" data-tags="leadership" onclick="toggleExp(this)">
+        <div class="exp-header">
+          <div>
+            <div class="exp-org">Women's March Jakarta 2024</div>
+            <div class="exp-role">Pre-Event Coordinator · Jakarta</div>
+          </div>
+          <div class="exp-meta">
+            <div class="exp-date">Aug – Dec 2024</div>
+            <span class="exp-tag tag-leadership">Leadership</span>
+          </div>
+        </div>
+        <div class="exp-body">
+          <div class="star-method">
+            <div class="star-item">
+              <div class="star-label">Situation</div>
+              <div class="star-text">Large-scale public event requiring coordination across 50+ partner organizations with diverse mandates — climate, indigenous rights, disability, labor, and more.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-label">Task</div>
+              <div class="star-text">Manage pre-event logistics, coordinate multi-organization communication, and serve as Liaison Officer for the press conference.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-label">Action</div>
+              <div class="star-text">Coordinated 50+ partners across 10+ parallel activity streams; led a 4-location roadshow; managed press conference logistics for 10+ attending organizations with real-time issue resolution.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-label">Result</div>
+              <div class="star-text">Event executed successfully with thousands of participants. Press conference ran without incident across all partner organizations.</div>
+            </div>
+          </div>
+          <div class="exp-highlights">
+            <span class="highlight-chip">Coalition Coordination</span>
+            <span class="highlight-chip">Event Logistics</span>
+            <span class="highlight-chip">Multi-stakeholder Comms</span>
+            <span class="highlight-chip">Crisis Resolution</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Whiteboard Journal -->
+      <div class="exp-item" data-tags="media" onclick="toggleExp(this)">
+        <div class="exp-header">
+          <div>
+            <div class="exp-org">Whiteboard Journal</div>
+            <div class="exp-role">Editorial Intern · South Jakarta</div>
+          </div>
+          <div class="exp-meta">
+            <div class="exp-date">Feb 2026 – Present</div>
+            <span class="exp-tag tag-media">Media</span>
+          </div>
+        </div>
+        <div class="exp-body">
+          <div class="star-method">
+            <div class="star-item">
+              <div class="star-label">Situation</div>
+              <div class="star-text">Fast-paced editorial environment requiring daily content ideation, cross-functional coordination, and consistent output across multiple publishing cycles.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-label">Task</div>
+              <div class="star-text">Support editorial planning through trend analysis, stakeholder coordination, and structured brief preparation.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-label">Action</div>
+              <div class="star-text">Analyzed audience and content performance data across 5+ publishing cycles; coordinated with editorial, design, and marketing teams; prepared structured briefs translating data insights into planning inputs.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-label">Result</div>
+              <div class="star-text">Contributed to consistent editorial output with measurable improvement in content planning efficiency.</div>
+            </div>
+          </div>
+          <div class="exp-highlights">
+            <span class="highlight-chip">Content Analytics</span>
+            <span class="highlight-chip">Cross-functional Collab</span>
+            <span class="highlight-chip">Brief Writing</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Supply Chain Portfolio -->
+      <div class="exp-item" data-tags="portfolio" onclick="toggleExp(this)">
+        <div class="exp-header">
+          <div>
+            <div class="exp-org">Supply Chain Analysis — Independent Case Study</div>
+            <div class="exp-role">Independent Analyst · Port-to-Warehouse Lead Time Optimization</div>
+          </div>
+          <div class="exp-meta">
+            <div class="exp-date">Apr 2026</div>
+            <span class="exp-tag tag-portfolio">Portfolio</span>
+          </div>
+        </div>
+        <div class="exp-body">
+          <div class="star-method">
+            <div class="star-item">
+              <div class="star-label">Situation</div>
+              <div class="star-text">No formal logistics background — but applying to Samudera SMDP. Decided to self-study the core operational challenge: container delivery efficiency.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-label">Task</div>
+              <div class="star-text">Build a credible, data-grounded operations case study on port-to-warehouse delivery lead time using public data and modeled operational dataset.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-label">Action</div>
+              <div class="star-text">Designed 60-shipment modeled dataset; conducted bottleneck analysis using AVERAGEIF, COUNTIF, and IF formulas; identified 3 root causes; built impact simulation with scenario-based projections.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-label">Result</div>
+              <div class="star-text">Full 5-tab Excel deliverable with Project Brief, Public Sources, Shipment Data, Analysis, and Recommendations tabs. On-time rate improvement modeled from 25% → ~70%.</div>
+            </div>
+          </div>
+          <div class="exp-highlights">
+            <span class="highlight-chip">Excel · Google Sheets</span>
+            <span class="highlight-chip">AVERAGEIF · COUNTIF</span>
+            <span class="highlight-chip">Bottleneck Analysis</span>
+            <span class="highlight-chip">Impact Simulation</span>
+            <span class="highlight-chip">BPS · Mordor Intelligence Data</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Management -->
+      <div class="exp-item" data-tags="portfolio leadership" onclick="toggleExp(this)">
+        <div class="exp-header">
+          <div>
+            <div class="exp-org">Product Management Bootcamp — Rakamin x Traveloka</div>
+            <div class="exp-role">PM Trainee · Batch 7</div>
+          </div>
+          <div class="exp-meta">
+            <div class="exp-date">Mar – Jul 2024</div>
+            <span class="exp-tag tag-portfolio">Portfolio</span>
+          </div>
+        </div>
+        <div class="exp-body">
+          <div class="star-method">
+            <div class="star-item">
+              <div class="star-label">Situation</div>
+              <div class="star-text">Traveloka facing persistent negative reviews due to inadequate customer service — especially chatbot limitations during urgent booking issues.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-label">Task</div>
+              <div class="star-text">As part of a 6-person team, define problem, develop solution, plan MVP, build prototype, and present full product strategy.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-label">Action</div>
+              <div class="star-text">Led user research (survey + interviews); applied Impact-Urgency prioritization matrix; developed OKRs, NSM, PRD; built Figma prototype; designed Go-to-Market strategy with launch timeline.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-label">Result</div>
+              <div class="star-text">Delivered full product case to Rakamin Academy. Recommended feature: AI Chatbot + Live Agent integration with keyboard and image input — projected 20% CLV increase in 12 months.</div>
+            </div>
+          </div>
+          <div class="exp-highlights">
+            <span class="highlight-chip">OKR · NSM · PRD</span>
+            <span class="highlight-chip">User Research</span>
+            <span class="highlight-chip">MVP Planning</span>
+            <span class="highlight-chip">Figma Prototype</span>
+            <span class="highlight-chip">Go-to-Market Strategy</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="reveal">
+    <div class="section-label">Portfolio Projects</div>
+    <h2 class="section-title">Built before being hired.<br>To prove I'm ready.</h2>
+    <p class="section-sub">Three independent projects developed specifically to demonstrate business thinking relevant to Samudera Indonesia's operations.</p>
+  </div>
+
+  <div class="portfolio-grid reveal">
+
+    <div class="portfolio-card featured">
+      <div class="port-tag">Featured · Logistics Operations Analysis</div>
+      <h3 class="port-title">Port-to-Warehouse Container Delivery Lead Time Optimization</h3>
+      <p class="port-desc">Independent supply chain case study analyzing bottlenecks in container delivery from Tanjung Priok to Jakarta warehouses, using a 60-shipment modeled operational dataset grounded in public industry data from BPS and Pelindo.</p>
+      <div class="port-highlights">
+        <div class="port-highlight">Identified 3 primary bottlenecks: port waiting time (avg 173 min vs 52 min benchmark), warehouse congestion (avg 121 min), and peak-hour dispatch (85 min vs 58 min non-peak)</div>
+        <div class="port-highlight">Built impact simulation projecting on-time delivery improvement from 25% → ~70% with 3 operational recommendations</div>
+        <div class="port-highlight">Full 5-tab Excel deliverable: Project Brief, Public Sources, Shipment Data, Analysis, Recommendations</div>
+      </div>
+      <div class="port-tools">
+        <span class="tool-chip">Excel / Google Sheets</span>
+        <span class="tool-chip">AVERAGEIF · COUNTIF · IF</span>
+        <span class="tool-chip">BPS Data</span>
+        <span class="tool-chip">Tanjung Priok Route Analysis</span>
+        <span class="tool-chip">Impact Simulation</span>
+      </div>
+    </div>
+
+    <div class="portfolio-card">
+      <div class="port-tag">Industry Brief · Human Capital</div>
+      <h3 class="port-title">Bridging the Talent Gap in Indonesia's Logistics Sector</h3>
+      <p class="port-desc">Strategic analysis of structural human capital challenges facing integrated logistics companies like Samudera Indonesia, with three evidence-based recommendations for talent development.</p>
+      <div class="port-highlights">
+        <div class="port-highlight">Data from McKinsey, ManpowerGroup, ALI, and Deloitte</div>
+        <div class="port-highlight">Three HC recommendations: rotational development, digital upskilling, and retention design</div>
+        <div class="port-highlight">Demonstrates strategic thinking about Samudera's people challenges before joining</div>
+      </div>
+      <div class="port-tools">
+        <span class="tool-chip">Industry Research</span>
+        <span class="tool-chip">McKinsey · ALI · ManpowerGroup</span>
+        <span class="tool-chip">Policy Brief Format</span>
+      </div>
+    </div>
+
+    <div class="portfolio-card">
+      <div class="port-tag">Business Strategy · Market Analysis</div>
+      <h3 class="port-title">Strategic Entry into Indonesia's E-Commerce Logistics Market</h3>
+      <p class="port-desc">Independent business strategy case analyzing whether and how Samudera Indonesia should enter the fast-growing e-commerce logistics segment, including competitive analysis, entry model evaluation, and 5-year financial projection.</p>
+      <div class="port-highlights">
+        <div class="port-highlight">Market sizing: USD 5.27B (2025) → USD 8.71B (2031) at 8.71% CAGR</div>
+        <div class="port-highlight">Recommended B2B2C backbone strategy leveraging existing Samudera assets</div>
+        <div class="port-highlight">Projected USD 40–60M revenue by Year 3 with positive EBITDA from Year 2</div>
+      </div>
+      <div class="port-tools">
+        <span class="tool-chip">Porter's Five Forces</span>
+        <span class="tool-chip">Resource-Based View</span>
+        <span class="tool-chip">Mordor Intelligence · Ken Research</span>
+        <span class="tool-chip">Financial Modeling</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-content reveal">
+    <div class="section-label">Get in Touch</div>
+    <h2 class="section-title">Let's talk about<br>what I can bring to SMDP</h2>
+    <a href="mailto:gloriasarahsaragih@gmail.com" class="contact-email">gloriasarahsaragih@gmail.com</a>
+    <p style="color:var(--mid); font-size:0.9rem; margin-bottom:1.5rem;">+62 811 567 7500 · Bekasi, Indonesia</p>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/gloriasarah" target="_blank" class="social-link">LinkedIn →</a>
+      <a href="https://linktr.ee/gloria.sarah" target="_blank" class="social-link">Linktree →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Gloria Sarah Saragih</p>
+  <p>Built as part of SMDP 2026 application portfolio</p>
+</footer>
+
+<script>
+// ── COMPETENCY TOGGLE ─────────────────────────────────────────────────
+function toggleComp(card) {
+  const isActive = card.classList.contains('active');
+  document.querySelectorAll('.comp-card').forEach(c => c.classList.remove('active'));
+  if (!isActive) card.classList.add('active');
+}
+
+// ── EXPERIENCE TOGGLE ─────────────────────────────────────────────────
+function toggleExp(item) {
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.exp-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// ── EXPERIENCE FILTER ─────────────────────────────────────────────────
+function filterExp(tag, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  document.querySelectorAll('.exp-item').forEach(item => {
+    const tags = item.dataset.tags || '';
+    if (tag === 'all' || tags.includes(tag)) {
+      item.style.display = '';
+      setTimeout(() => item.style.opacity = '1', 10);
+    } else {
+      item.style.opacity = '0';
+      setTimeout(() => item.style.display = 'none', 200);
+    }
+    item.classList.remove('open');
+  });
+}
+
+// ── SCROLL REVEAL ─────────────────────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Auto-open first competency
+setTimeout(() => {
+  document.querySelector('.comp-card').classList.add('active');
+}, 1500);
+</script>
+</body>
+</html>
